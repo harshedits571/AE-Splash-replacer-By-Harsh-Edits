@@ -1,17 +1,35 @@
 {
   "name": "ae-splash-screen-customizer",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ae-splash-screen-customizer.git"
+  },
+  "keywords": [
+    "after-effects",
+    "splash-screen",
+    "customizer",
+    "adobe"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/ae-splash-screen-customizer/issues"
+  },
+  "homepage": "https://github.com/your-username/ae-splash-screen-customizer#readme",
   "dependencies": {
     "react-dom": "^19.2.3",
     "react": "^19.2.3",
-    "lucide-react": "^0.562.0"
+    "lucide-react": "^0.562.0",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

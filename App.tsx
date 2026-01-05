@@ -5,12 +5,7 @@ import Controls from './components/Controls';
 import { SplashSettings } from './types';
 import { DEFAULT_SETTINGS } from './constants';
 import { Monitor, Info } from 'lucide-react';
-
-declare global {
-  interface Window {
-    html2canvas: any;
-  }
-}
+import html2canvas from 'html2canvas';
 
 const App: React.FC = () => {
   const [settings, setSettings] = useState<SplashSettings>(DEFAULT_SETTINGS);
@@ -57,7 +52,7 @@ const App: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
-      return await window.html2canvas(splashRef.current, {
+      return await html2canvas(splashRef.current, {
         width: 700,
         height: 500,
         scale: 1, 

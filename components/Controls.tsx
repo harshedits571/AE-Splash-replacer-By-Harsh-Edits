@@ -167,7 +167,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
             {/* Step 7: Save */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">7</span>
-              <p className="text-[11px] text-zinc-400">Click <span className="text-indigo-400 font-bold">File > Save</span>. Restart After Effects to see your new splash!</p>
+              <p className="text-[11px] text-zinc-400">Click <span className="text-indigo-400 font-bold">File &gt; Save</span>. Restart After Effects to see your new splash!</p>
             </div>
           </div>
         </section>
