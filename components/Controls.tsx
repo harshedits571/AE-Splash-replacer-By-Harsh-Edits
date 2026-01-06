@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
-import { SplashSettings, BackgroundType, Preset, FitMode } from '../types';
-import { PRESETS, DEFAULT_SETTINGS } from '../constants';
+import { SplashSettings, BackgroundType, Preset, FitMode } from '../types.ts';
+import { PRESETS, DEFAULT_SETTINGS } from '../constants.tsx';
 import { 
   Upload, 
   Type, 
@@ -16,9 +16,7 @@ import {
   BookOpen,
   ExternalLink,
   ChevronRight,
-  FolderSearch,
-  FileDigit,
-  Save
+  Fingerprint
 } from 'lucide-react';
 
 interface ControlsProps {
@@ -75,7 +73,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
         <div className="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-600/20">
           <Box className="w-5 h-5 text-white" />
         </div>
-        <h2 className="text-xl font-bold tracking-tight">Customizer</h2>
+        <h2 className="text-xl font-bold tracking-tight text-white">Customizer</h2>
       </div>
 
       <div className="space-y-8 pb-12">
@@ -103,7 +101,6 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
           </div>
           
           <div className="space-y-4">
-            {/* Step 2: Resource Hacker */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] font-bold text-white">2</span>
               <div className="space-y-2 flex-1">
@@ -119,7 +116,6 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               </div>
             </div>
 
-            {/* Step 3: File Location */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">3</span>
               <div className="space-y-2 flex-1">
@@ -131,13 +127,11 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               </div>
             </div>
 
-            {/* Step 4: Import */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">4</span>
               <p className="text-[11px] text-zinc-400">Launch Resource Hacker and <span className="text-zinc-200">Drag & Drop</span> the DLL file into the window.</p>
             </div>
 
-            {/* Step 5: Navigate */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">5</span>
               <div className="space-y-1">
@@ -152,7 +146,6 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               </div>
             </div>
 
-            {/* Step 6: Replace */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">6</span>
               <div className="space-y-1.5">
@@ -164,7 +157,6 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               </div>
             </div>
 
-            {/* Step 7: Save */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">7</span>
               <p className="text-[11px] text-zinc-400">Click <span className="text-indigo-400 font-bold">File &gt; Save</span>. Restart After Effects to see your new splash!</p>
@@ -204,7 +196,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               value={settings.title}
               onChange={e => setSettings(prev => ({ ...prev, title: e.target.value }))}
               placeholder="App Title (e.g. After Effects)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-zinc-500"
             />
           </div>
           <div>
@@ -213,7 +205,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               value={settings.subtitle}
               onChange={e => setSettings(prev => ({ ...prev, subtitle: e.target.value }))}
               placeholder="Subtitle (e.g. 2025 Release)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-zinc-500"
             />
           </div>
           <div className="flex gap-4">
@@ -233,6 +225,32 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
                 value={settings.subtitleColor} 
                 onChange={e => setSettings(prev => ({ ...prev, subtitleColor: e.target.value }))}
                 className="w-full h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Branding Sub-text (CC Logo Text) */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Fingerprint className="w-4 h-4 text-zinc-400" />
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500">Branding (Bottom Left)</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={settings.ccLogoText}
+              onChange={e => setSettings(prev => ({ ...prev, ccLogoText: e.target.value }))}
+              placeholder="Branding Text (e.g. Adobe Creative Cloud)"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-zinc-500 mb-2"
+            />
+            <div className="flex gap-2 items-center">
+              <label className="text-[10px] text-zinc-500 block font-bold uppercase tracking-tighter shrink-0">Text Color</label>
+              <input 
+                type="color" 
+                value={settings.ccLogoTextColor} 
+                onChange={e => setSettings(prev => ({ ...prev, ccLogoTextColor: e.target.value }))}
+                className="flex-1 h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
               />
             </div>
           </div>
@@ -321,6 +339,36 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
                 type="file" 
                 accept="image/*"
                 onChange={e => handleFileUpload(e, 'aeLogoUrl')}
+                className="text-[10px] text-zinc-500 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-500/10 file:text-indigo-400 hover:file:bg-indigo-500/20 cursor-pointer w-full"
+               />
+             </div>
+
+             {/* Creative Cloud Logo */}
+             <div className="bg-zinc-800 p-3 rounded-lg border border-zinc-700 group transition-colors hover:border-zinc-600">
+               <div className="flex justify-between items-center mb-2">
+                 <label className="text-xs font-medium text-zinc-300">Branding Logo (Bottom Left)</label>
+                 <div className="flex gap-1">
+                    <button 
+                      onClick={() => clearFile('ccLogoUrl', ccLogoRef)}
+                      className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-red-400 transition-colors"
+                      title="Remove Logo"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                    <button 
+                      onClick={() => resetFile('ccLogoUrl', ccLogoRef)}
+                      className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-indigo-400 transition-colors"
+                      title="Reset to default"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                    </button>
+                 </div>
+               </div>
+               <input 
+                ref={ccLogoRef}
+                type="file" 
+                accept="image/*"
+                onChange={e => handleFileUpload(e, 'ccLogoUrl')}
                 className="text-[10px] text-zinc-500 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-500/10 file:text-indigo-400 hover:file:bg-indigo-500/20 cursor-pointer w-full"
                />
              </div>

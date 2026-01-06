@@ -1,9 +1,8 @@
-
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import SplashScreen from './components/SplashScreen';
-import Controls from './components/Controls';
-import { SplashSettings } from './types';
-import { DEFAULT_SETTINGS } from './constants';
+import SplashScreen from './components/SplashScreen.tsx';
+import Controls from './components/Controls.tsx';
+import { SplashSettings } from './types.ts';
+import { DEFAULT_SETTINGS } from './constants.tsx';
 import { Monitor, Info } from 'lucide-react';
 import html2canvas from 'html2canvas';
 

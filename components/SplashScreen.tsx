@@ -1,6 +1,6 @@
 
 import React, { useMemo } from 'react';
-import { SplashSettings, BackgroundType } from '../types';
+import { SplashSettings, BackgroundType } from '../types.ts';
 
 interface SplashScreenProps {
   settings: SplashSettings;
@@ -33,13 +33,13 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ settings, isExporting, mous
           backgroundPosition: 'center'
         };
       default:
-        return {};
+        return { backgroundColor: 'transparent' };
     }
   }, [settings]);
 
   return (
     <div className="relative group" style={{ width: '700px', height: '500px' }}>
-      {/* Visual Guide Overlay */}
+      {/* Visual Guide Overlay - Completely removed during export */}
       {!isExporting && (
         <div className="absolute inset-0 pointer-events-none border-2 border-indigo-500/20 rounded-lg overflow-hidden z-50">
            <div className="absolute inset-x-[250px] inset-y-0 border-x border-white/5 bg-white/[0.02]" title="Reserved for AE loading animation"></div>
@@ -50,19 +50,20 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ settings, isExporting, mous
       <div
         ref={innerRef}
         id="ae-splash-target"
-        className="relative overflow-hidden shadow-2xl bg-black"
+        className={`relative overflow-hidden ${!isExporting ? 'shadow-2xl' : ''}`}
         style={{
           width: '700px',
           height: '500px',
           fontFamily: settings.fontFamily,
           ...bgStyle,
           ...transformStyle,
+          backgroundColor: settings.bgType === BackgroundType.SOLID ? settings.bgColor : 'transparent'
         }}
       >
         {/* Left Section: Logo + Text */}
-        <div className="absolute left-0 top-0 bottom-0 w-[250px] p-8 flex flex-col justify-between z-10 pointer-events-none">
+        <div className="absolute left-0 top-0 bottom-0 w-[250px] p-8 flex flex-col justify-between z-10 pointer-events-none bg-transparent">
           <div className="flex flex-col items-start">
-            {/* Logo */}
+            {/* AE Logo */}
             <div className="mb-8 w-16 h-16 flex items-center justify-center">
               {settings.aeLogoUrl && (
                 <img 
@@ -88,18 +89,19 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ settings, isExporting, mous
             </p>
           </div>
 
-          {/* Bottom Branding */}
-          <div className="flex items-center gap-2">
+          {/* Bottom Branding - No background or shadow here */}
+          <div className="flex items-center gap-2 bg-transparent shadow-none border-none">
             {settings.ccLogoUrl && (
               <img 
                 src={settings.ccLogoUrl} 
                 alt="CC Logo" 
                 className="w-8 h-8 object-contain shrink-0"
+                style={{ filter: 'none' }}
               />
             )}
             <span 
-              className="text-[10px] uppercase tracking-widest opacity-40 font-bold leading-none" 
-              style={{ color: settings.ccLogoTextColor }}
+              className="text-[10px] uppercase tracking-widest font-bold leading-none" 
+              style={{ color: settings.ccLogoTextColor, textShadow: 'none' }}
             >
               {settings.ccLogoText}
             </span>
@@ -129,9 +131,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ settings, isExporting, mous
             )}
           </div>
         </div>
-
-        {/* Subtle decorative overlays */}
-        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.5)_100%)]"></div>
       </div>
     </div>
   );
